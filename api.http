@@ -1,25 +1,22 @@
-GET http://localhost:3000
+GET http://localhost:3000/api/assets
 
 ###
 POST http://localhost:3000/api/assets
 Content-Type: application/json
 
 {
-  "id": "asset2",
-  "symbol": "A1",
-  "price": 100
+  "id": "asset1",
+  "symbol": "ASSET1"
 }
-
-###
-GET http://localhost:3000/api/assets
 
 ###
 GET http://localhost:3000/api/orders
 
 ###
 POST http://localhost:3000/api/orders
+Content-Type: application/json
 
 {
-  "asset_id": "asset2",
-  "price": 120,
+  "asset_id": "asset1",
+  "price": 100
 }

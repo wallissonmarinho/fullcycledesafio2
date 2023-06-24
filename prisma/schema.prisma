@@ -2,8 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["extendedWhereUnique"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -12,21 +11,21 @@ datasource db {
 }
 
 model Asset {
-  id     String  @id @map("_id")
+  id     String @id @map("_id")
   symbol String
-  Orders Order[]
+  orders Order[]
 }
 
 model Order {
-  id       String      @id @default(auto()) @map("_id") @db.ObjectId
-  Asset    Asset       @relation(fields: [asset_id], references: [id])
+  id String   @id @default(auto()) @map("_id") @db.ObjectId
+  Asset Asset @relation(fields: [asset_id], references: [id])
   asset_id String
-  price    Float
-  status   OrderStatus
+  price Float
+  status OrderStatus
 }
 
 enum OrderStatus {
-  pending
-  open
-  closed
+  OPEN
+  PENDING
+  CLOSED
 }
