@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: bitnami/mongodb:5.0.17
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_KEY=123456
+      - MONGODB_ROOT_PASSWORD=root
+      - MONGODB_USERNAME=root
+      - MONGODB_PASSWORD=root
+      - MONGODB_DATABASE=fullcycle
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongodb:/data/db
+    networks:
+      - mongodb
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  app:
+    container_name: app
+    environment:
+      - DATABASE_URL=mongodb://root:root@mongodb:27017/fullcycle?ssl=false&connectTimeoutMS=5000
+    build:
+      context: .
+      target: prod
+      dockerfile: Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+    networks:
+      - mongodb
+    volumes:
+      - ./app:/var/app
+      - /var/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+
+networks:
+  mongodb:
+    driver: bridge

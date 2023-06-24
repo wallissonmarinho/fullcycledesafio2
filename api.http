@@ -1,22 +1,28 @@
-GET http://localhost:3000/api/assets
 
-###
-POST http://localhost:3000/api/assets
+POST http://localhost:3000/api/assets HTTP/1.1
 Content-Type: application/json
 
 {
-  "id": "asset1",
-  "symbol": "ASSET1"
+  "id": "N4WtzYgnqeKU3HPRTXjZ2",
+  "symbol": "asset"
 }
 
 ###
-GET http://localhost:3000/api/orders
+
+GET http://localhost:3000/api/assets HTTP/1.1
+Content-Type: application/json
 
 ###
-POST http://localhost:3000/api/orders
+
+POST http://localhost:3000/api/orders HTTP/1.1
 Content-Type: application/json
 
 {
-  "asset_id": "asset1",
+  "asset_id": "N4WtzYgnqeKU3HPRTXjZ2",
   "price": 100
 }
+
+###
+
+GET http://localhost:3000/api/orders HTTP/1.1
+Content-Type: application/json
