@@ -1,15 +1,7 @@
-FROM node:20
+FROM node:20-slim
 
-WORKDIR /usr/src/app
+WORKDIR /home/node/app
 
-COPY . .
+USER node
 
-RUN npm install --quiet --no-optional --no-fund --loglevel=error
-
-RUN npm run build
-
-CMD ["npm", "run", "start:prod"]
-
-# WORKDIR /home/node/app
-# USER node
-# CMD [ "tail", "-f", "/dev/null" ]
+CMD [ "tail", "-f", "/dev/null" ]

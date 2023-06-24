@@ -1,2 +1,25 @@
-### Hello World! Test
 GET http://localhost:3000
+
+###
+POST http://localhost:3000/api/assets
+Content-Type: application/json
+
+{
+  "id": "asset2",
+  "symbol": "A1",
+  "price": 100
+}
+
+###
+GET http://localhost:3000/api/assets
+
+###
+GET http://localhost:3000/api/orders
+
+###
+POST http://localhost:3000/api/orders
+
+{
+  "asset_id": "asset2",
+  "price": 120,
+}
